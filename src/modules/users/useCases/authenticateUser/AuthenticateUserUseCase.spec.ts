@@ -36,17 +36,9 @@ describe("Authenticate User", () => {
 
   it("should not be able to authenticate with an nonexistent user", () => {
     expect(async () => {
-      const user: ICreateUserDTO = {
-        email: "test@jest.com",
-        name: "Test Jest",
-        password: "test"
-      };
-
-      await createUserUseCase.execute(user);
-
       await authenticateUserUseCase.execute({
         email: "test@error.com",
-        password: user.password
+        password: "testerror"
       });
     }).rejects.toBeInstanceOf(IncorrectEmailOrPasswordError);
   });
